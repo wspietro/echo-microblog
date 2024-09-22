@@ -1,9 +1,7 @@
 require "test_helper"
 
-# run before every test
-
-
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
+# run before every test
   def setup
     @base_title = "Echo"
   end
@@ -11,12 +9,12 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get root page" do
     get root_url
     assert_response :success
-    assert_select "title", "#{@base_title} | Home"
+    assert_select "title", "#{@base_title}"
   end
   test "should get home" do
     get static_pages_home_url
     assert_response :success
-    assert_select "title", "#{@base_title} | Home"
+    assert_select "title", "#{@base_title}"
   end
 
   test "should get help" do
