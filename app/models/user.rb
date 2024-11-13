@@ -11,4 +11,6 @@ class User < ApplicationRecord
                       uniqueness: true,
                     # uniqueness: { case_sensitive: false }, - não mais necessário pq temos before_save. melhor pratica para o db index
                     }
+  has_secure_password
+  validates :password, { presence: true, length: { minimum: 6 } }
 end
