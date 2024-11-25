@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       # handle a successful save.
+      # we can omit the user_url(@user)
+      flash[:success] = "Weclcome to the Echo, #{@user[:name].split.first}!"
+      redirect_to @user
     else
       render "new", status: :unprocessable_entity
     end
