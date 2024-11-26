@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       # handle a successful save.
       # we can omit the user_url(@user)
-      flash[:success] = "Weclcome to the Echo, #{@user[:name].split.first}!"
+      flash[:success] = "Welcome to the Echo, #{@user[:name].split.first}!"
       redirect_to @user
     else
       render "new", status: :unprocessable_entity
