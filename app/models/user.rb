@@ -2,6 +2,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   before_save { self.email = email.downcase }
+  before_validation { self.name = name.squish }
   # before_save { email.downcase! } - podemos utilizar bang method para alterar o atributo diretamente
   validates :name, { presence: true, length: { maximum: 50 } }
   validates :email, {
