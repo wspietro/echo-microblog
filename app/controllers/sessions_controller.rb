@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: session_params[:email].downcase)
-    if user && user.authenticate(session_params[:password])
+    if user&.authenticate(session_params[:password])
       # nos previne contra session fixation
       # invalida sessao atual e cria uma nova
       reset_session
