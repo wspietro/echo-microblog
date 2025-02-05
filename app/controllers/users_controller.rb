@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       # handle a successful save.
       # we can omit the user_url(@user)
+      reset_session
       log_in @user
       flash[:success] = "Welcome to the Echo, #{@user[:name].split.first}!"
       redirect_to @user
