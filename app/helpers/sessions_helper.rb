@@ -12,7 +12,7 @@ module SessionsHelper
     # Salva ID encriptado nos cookies
     cookies.permanent.signed[:user_id] = user.id
     # Salva token nos cookies
-    cookies.permanent[:token] = user.remember_token
+    cookies.permanent[:remember_token] = user.remember_token
   end
 
   # returns the current logged-in user (if any)
@@ -31,14 +31,22 @@ module SessionsHelper
     end
   end
 
-  # logs out the given user
-  def log_out()
-    reset_session
-    @current_user = nil
-  end
-
   # returns true if the user is logged in
   def logged_in?
     !current_user.nil?
+  end
+
+  # forgets a persistent session
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
+
+  # logs out the given user
+  def log_out()
+    forget(current_user)
+    reset_session
+    @current_user = nil
   end
 end
