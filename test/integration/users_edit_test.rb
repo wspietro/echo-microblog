@@ -5,7 +5,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user = users(:pietro)
   end
 
-  test "invalid edit information" do
+  test "unsuccessful edit" do
     get edit_user_path(@user)
     assert_template "users/edit"
 
@@ -26,5 +26,25 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_not_equal "", @user.name
     assert_not_equal "user@invalid", @user.email
+  end
+
+  test "successful edit without password" do
+    get edit_user_path(@user)
+    assert_template "users/edit"
+
+    name = "Pietro Edit"
+    email = "pietro-edit@example.com"
+    test_user_input = { name: name,
+                        email: email,
+                        password: "",
+                        password_confirmation: "" }
+    patch(user_path, params: { user: test_user_input })
+
+    assert_redirected_to @user
+
+    assert_equal flash[:success], "Profile updated."
+    @user.reload
+    assert_equal name, @user.name
+    assert_equal email, @user.email
   end
 end

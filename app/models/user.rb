@@ -14,7 +14,7 @@ class User < ApplicationRecord
                     # uniqueness: { case_sensitive: false }, - não mais necessário pq temos before_save. melhor pratica para o db index
                     }
   has_secure_password
-  validates :password, { presence: true, length: { minimum: 6 } }
+  validates :password, { presence: true, length: { minimum: 6 }, allow_nil: true }
 
   # Returns the hash digest of the given string.
   def User.digest(string)
