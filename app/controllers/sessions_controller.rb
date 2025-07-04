@@ -7,10 +7,11 @@ class SessionsController < ApplicationController
     if user&.authenticate(session_params[:password])
       # nos previne contra session fixation
       # invalida sessao atual e cria uma nova
+      forwarding_url = session[:forwarding_url]
       reset_session
       log_in user
       params[:session][:remember_me] == "1" ? remember(user) : forget(user)
-      redirect_to user
+      redirect_to forwarding_url || user
     else
       flash.now[:danger] = "Invalid email/password combination."
       render "new", status: :unprocessable_entity
