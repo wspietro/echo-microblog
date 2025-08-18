@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+
+  # generates only the edit route;
+  # helper edit_account_activation_url(activation_token, ...)
+  resources :account_activations, only: [:edit]
 end
