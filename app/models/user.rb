@@ -1,7 +1,7 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   attr_accessor :remember_token, :activation_token, :reset_token
-
   before_save :downcase_email
   before_create :create_activation_digest
   before_validation { self.name = name.squish }
