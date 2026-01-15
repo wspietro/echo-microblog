@@ -1,3 +1,4 @@
+// Add toggle listeners to listen for clicks.
 document.addEventListener("turbo:load", () => {
   let hamburguer = document.querySelector("#hamburguer")
   hamburguer.addEventListener("click", (event) => {
